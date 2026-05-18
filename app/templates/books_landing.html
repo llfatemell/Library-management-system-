@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+{% block title %}
+Books Management
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+
+    <i class="fas fa-book-open"></i>
+
+    Books Management
+
+</h1>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <form
+        method="get"
+        action="/books/landing"
+        class="search-form"
+    >
+
+        <input
+            type="text"
+            name="search"
+            class="search-input"
+            placeholder="Search by title, author, or ISBN..."
+            value="{{ search }}"
+        >
+
+        <button type="submit" class="btn btn-green">
+
+            <i class="fas fa-search"></i>
+
+            Search
+
+        </button>
+
+        <a
+            href="/books/landing"
+            class="btn btn-gray"
+        >
+            Clear
+        </a>
+
+    </form>
+
+</div>
+
+<!-- ADD BUTTON -->
+
+<div style="margin-bottom:25px;">
+
+    <a
+        href="/books/add"
+        class="btn btn-green"
+    >
+
+        <i class="fas fa-plus"></i>
+
+        Add New Book
+
+    </a>
+
+</div>
+
+<!-- SORT -->
+
+<div class="search-box">
+
+    <strong>Sort by:</strong>
+
+    <a
+        href="/books/landing?search={{ search }}"
+        class="btn btn-green"
+        style="padding:8px 16px;"
+    >
+        Default
+    </a>
+
+    <a
+        href="/books/landing?search={{ search }}&sort=title"
+        class="btn"
+    >
+        Title
+    </a>
+
+    <a
+        href="/books/landing?search={{ search }}&sort=author"
+        class="btn"
+    >
+        Author
+    </a>
+
+    <a
+        href="/books/landing?search={{ search }}&sort=year"
+        class="btn"
+    >
+        Year
+    </a>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-wrapper">
+
+    <div class="table-title">
+
+        <i class="fas fa-table"></i>
+
+        All Books
+
+    </div>
+
+    <table class="data-table">
+
+        <thead>
+
+            <tr>
+
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Status</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for book in books %}
+
+            <tr>
+
+                <td>{{ book.isbn }}</td>
+
+                <td>{{ book.title }}</td>
+
+                <td>{{ book.author }}</td>
+
+                <td>{{ book.year }}</td>
+
+                <td>
+
+                    {% if book.borrowed %}
+
+                        <span class="badge badge-gray">
+
+                            Loaned
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge badge-green">
+
+                            Available
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <a
+                        href="/books/edit/{{ book.isbn }}"
+                        class="btn btn-yellow"
+                        style="padding:8px 12px;"
+                    >
+
+                        <i class="fas fa-pen"></i>
+
+                    </a>
+
+                    <a
+                        href="/books/delete/{{ book.isbn }}"
+                        class="btn btn-red"
+                        style="padding:8px 12px;"
+                    >
+
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- PAGINATION -->
+
+<div class="pagination">
+
+    {% if page > 1 %}
+
+        <a href="{{ base_url }}&page={{ page - 1 }}">
+
+            ← Previous
+
+        </a>
+
+    {% endif %}
+
+    {% for p in range(1, total_pages + 1) %}
+
+        {% if p == page %}
+
+            <a class="active">
+
+                {{ p }}
+
+            </a>
+
+        {% else %}
+
+            <a href="{{ base_url }}&page={{ p }}">
+
+                {{ p }}
+
+            </a>
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% if page < total_pages %}
+
+        <a href="{{ base_url }}&page={{ page + 1 }}">
+
+            Next →
+
+        </a>
+
+    {% endif %}
+
+</div>
+
+<div style="text-align:center; margin-top:15px;">
+
+    Page {{ page }} of {{ total_pages }}
+
+</div>
+
+{% endblock %}

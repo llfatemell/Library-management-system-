@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+
+    <i class="fas fa-chart-pie"></i>
+
+    Library Dashboard
+
+</h1>
+
+<div class="cards">
+
+    <div class="card">
+
+        <div class="card-header">
+            Total Books
+        </div>
+
+        <div class="card-body">
+            {{ total_books }}
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            Available
+        </div>
+
+        <div class="card-body">
+            {{ available_books }}
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            Loaned Out
+        </div>
+
+        <div class="card-body">
+            {{ borrowed_books }}
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            Members
+        </div>
+
+        <div class="card-body">
+            {{ total_members }}
+        </div>
+
+    </div>
+
+</div>
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        <i class="fas fa-list"></i>
+
+        Summary
+
+    </div>
+
+    <div class="panel-body">
+
+        <table class="summary-table">
+
+            <tr>
+                <td>Total books</td>
+                <td>{{ total_books }}</td>
+            </tr>
+
+            <tr>
+                <td>Available to loan</td>
+                <td>{{ available_books }}</td>
+            </tr>
+
+            <tr>
+                <td>Currently loaned</td>
+                <td>{{ borrowed_books }}</td>
+            </tr>
+
+            <tr>
+                <td>Total members</td>
+                <td>{{ total_members }}</td>
+            </tr>
+
+            <tr>
+                <td>Unique authors</td>
+                <td>{{ unique_authors }}</td>
+            </tr>
+
+            <tr>
+                <td>Oldest book</td>
+                <td>{{ oldest_book }}</td>
+            </tr>
+
+            <tr>
+                <td>Newest book</td>
+                <td>{{ newest_book }}</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+<div class="action-buttons">
+
+    <a href="/books/landing" class="btn btn-green">
+
+        <i class="fas fa-book"></i>
+
+        Manage Books
+
+    </a>
+
+    <a href="/members/landing" class="btn btn-green">
+
+        <i class="fas fa-users"></i>
+
+        Manage Members
+
+    </a>
+
+</div>
+
+{% endblock %}

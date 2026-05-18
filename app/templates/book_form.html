@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% if book %}
+Edit Book
+{% else %}
+Add Book
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+
+    {% if book %}
+
+        <i class="fas fa-pen"></i>
+
+        Edit Book
+
+    {% else %}
+
+        <i class="fas fa-plus-circle"></i>
+
+        Add New Book
+
+    {% endif %}
+
+</h1>
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        {% if book %}
+        Update Book Information
+        {% else %}
+        Create New Book
+        {% endif %}
+
+    </div>
+
+    <div class="panel-body">
+
+        <!-- ERROR -->
+
+        {% if error %}
+
+        <div
+            style="
+                background:#ffdede;
+                color:#a10000;
+                padding:12px;
+                border-radius:8px;
+                margin-bottom:20px;
+            "
+        >
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <!-- FORM -->
+
+        {% if book %}
+
+        <form method="post" action="/books/{{ book.isbn }}">
+
+        {% else %}
+
+        <form method="post" action="/books/">
+
+        {% endif %}
+
+            <!-- ISBN -->
+
+            <div style="margin-bottom:20px;">
+
+                <label>
+
+                    ISBN
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    name="isbn"
+                    class="search-input"
+
+                    {% if book %}
+                    value="{{ book.isbn }}"
+                    readonly
+                    {% endif %}
+
+                    required
+                >
+
+            </div>
+
+            <!-- TITLE -->
+
+            <div style="margin-bottom:20px;">
+
+                <label>
+
+                    Title
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    name="title"
+                    class="search-input"
+
+                    value="{{ book.title if book else '' }}"
+
+                    required
+                >
+
+            </div>
+
+            <!-- AUTHOR -->
+
+            <div style="margin-bottom:20px;">
+
+                <label>
+
+                    Author
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    name="author"
+                    class="search-input"
+
+                    value="{{ book.author if book else '' }}"
+
+                    required
+                >
+
+            </div>
+
+            <!-- YEAR -->
+
+            <div style="margin-bottom:20px;">
+
+                <label>
+
+                    Year
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="number"
+                    name="year"
+                    class="search-input"
+
+                    value="{{ book.year if book else '' }}"
+
+                    required
+                >
+
+            </div>
+
+            <!-- BORROWED -->
+
+            {% if book %}
+
+            <div style="margin-bottom:25px;">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        name="borrowed"
+
+                        {% if book.borrowed %}
+                        checked
+                        {% endif %}
+                    >
+
+                    Borrowed
+
+                </label>
+
+            </div>
+
+            {% endif %}
+
+            <!-- BUTTONS -->
+
+            <button
+                type="submit"
+                class="btn btn-green"
+            >
+
+                {% if book %}
+
+                    <i class="fas fa-save"></i>
+
+                    Update Book
+
+                {% else %}
+
+                    <i class="fas fa-plus"></i>
+
+                    Add Book
+
+                {% endif %}
+
+            </button>
+
+            <a
+                href="/books/landing"
+                class="btn btn-gray"
+            >
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
