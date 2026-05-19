@@ -19,5 +19,29 @@
         "author": "me",
         "year": 2000,
         "borrowed": true
+    },
+    {
+        "isbn": "56432",
+        "title": "signal",
+        "author": "Hasanpor",
+        "year": 1403,
+        "borrowed": true,
+        "loaned_to": "M001"
+    },
+    {
+        "isbn": "1234458888888",
+        "title": "yellow",
+        "author": "ziba",
+        "year": 2003,
+        "borrowed": false,
+        "loaned_to": ""
+    },
+    {
+        "isbn": "123449999999999",
+        "title": "red",
+        "author": "baran",
+        "year": 1998,
+        "borrowed": false,
+        "loaned_to": ""
     }
 ]

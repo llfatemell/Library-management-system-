@@ -5,39 +5,37 @@
 {% if book %}
 Edit Book
 {% else %}
-Add Book
+Add New Book
 {% endif %}
 
 {% endblock %}
 
 {% block content %}
 
-<h1 class="page-title">
+<div
+    class="panel"
+    style="
+        max-width: 700px;
+        margin: 30px auto;
+    "
+>
 
-    {% if book %}
-
-        <i class="fas fa-pen"></i>
-
-        Edit Book
-
-    {% else %}
-
-        <i class="fas fa-plus-circle"></i>
-
-        Add New Book
-
-    {% endif %}
-
-</h1>
-
-<div class="panel">
+    <!-- HEADER -->
 
     <div class="panel-header">
 
         {% if book %}
-        Update Book Information
+
+            <i class="fas fa-pen"></i>
+
+            Edit Book
+
         {% else %}
-        Create New Book
+
+            <i class="fas fa-plus"></i>
+
+            Add New Book
+
         {% endif %}
 
     </div>
@@ -68,19 +66,27 @@ Add Book
 
         {% if book %}
 
-        <form method="post" action="/books/{{ book.isbn }}">
+        <form
+            method="post"
+            action="/books/{{ book.isbn }}"
+        >
 
         {% else %}
 
-        <form method="post" action="/books/">
+        <form
+            method="post"
+            action="/books/"
+        >
 
         {% endif %}
 
             <!-- ISBN -->
 
-            <div style="margin-bottom:20px;">
+            <div style="margin-bottom:25px;">
 
                 <label>
+
+                    <i class="fas fa-barcode"></i>
 
                     ISBN
 
@@ -105,9 +111,11 @@ Add Book
 
             <!-- TITLE -->
 
-            <div style="margin-bottom:20px;">
+            <div style="margin-bottom:25px;">
 
                 <label>
+
+                    <i class="fas fa-heading"></i>
 
                     Title
 
@@ -129,9 +137,11 @@ Add Book
 
             <!-- AUTHOR -->
 
-            <div style="margin-bottom:20px;">
+            <div style="margin-bottom:25px;">
 
                 <label>
+
+                    <i class="fas fa-user-edit"></i>
 
                     Author
 
@@ -153,9 +163,11 @@ Add Book
 
             <!-- YEAR -->
 
-            <div style="margin-bottom:20px;">
+            <div style="margin-bottom:25px;">
 
                 <label>
+
+                    <i class="fas fa-calendar"></i>
 
                     Year
 
@@ -177,9 +189,7 @@ Add Book
 
             <!-- BORROWED -->
 
-            {% if book %}
-
-            <div style="margin-bottom:25px;">
+            <div style="margin-bottom:20px;">
 
                 <label>
 
@@ -187,18 +197,42 @@ Add Book
                         type="checkbox"
                         name="borrowed"
 
-                        {% if book.borrowed %}
+                        {% if book and book.borrowed %}
                         checked
                         {% endif %}
                     >
 
-                    Borrowed
+                    Currently loaned out
 
                 </label>
 
             </div>
 
-            {% endif %}
+            <!-- MEMBER ID -->
+
+            <div style="margin-bottom:30px;">
+
+                <label>
+
+                    <i class="fas fa-user"></i>
+
+                    Loaned to (Member ID)
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    name="loaned_to"
+                    class="search-input"
+
+                    value="{{ book.loaned_to if book else '' }}"
+
+                    placeholder="e.g. M001"
+                >
+
+            </div>
 
             <!-- BUTTONS -->
 
@@ -211,13 +245,13 @@ Add Book
 
                     <i class="fas fa-save"></i>
 
-                    Update Book
+                    Update
 
                 {% else %}
 
-                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-floppy-disk"></i>
 
-                    Add Book
+                    Create
 
                 {% endif %}
 

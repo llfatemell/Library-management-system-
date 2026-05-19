@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}
+Members Management
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+
+    <i class="fas fa-users"></i>
+
+    Members Management
+
+</h1>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <form
+        method="get"
+        action="/members/landing"
+        class="search-form"
+    >
+
+        <input
+            type="text"
+            name="search"
+            class="search-input"
+            placeholder="Search by name, email, or Member ID..."
+            value="{{ search }}"
+        >
+
+        <button
+            type="submit"
+            class="btn btn-green"
+        >
+
+            <i class="fas fa-search"></i>
+
+            Search
+
+        </button>
+
+        <a
+            href="/members/landing"
+            class="btn btn-gray"
+        >
+
+            Clear
+
+        </a>
+
+    </form>
+
+</div>
+
+<!-- ADD BUTTON -->
+
+<div style="margin-bottom:25px;">
+
+    <a
+        href="/members/add"
+        class="btn btn-green"
+    >
+
+        <i class="fas fa-plus"></i>
+
+        Add New Member
+
+    </a>
+
+</div>
+
+<!-- SORT -->
+
+<div class="search-box">
+
+    <strong>Sort by:</strong>
+
+    <a
+        href="/members/landing?search={{ search }}"
+        class="btn btn-green"
+        style="padding:8px 16px;"
+    >
+        Default
+    </a>
+
+    <a
+        href="/members/landing?search={{ search }}&sort=name"
+        class="btn"
+    >
+        Name
+    </a>
+
+    <a
+        href="/members/landing?search={{ search }}&sort=email"
+        class="btn"
+    >
+        Email
+    </a>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="table-wrapper">
+
+    <div class="table-title">
+
+        <i class="fas fa-table"></i>
+
+        All Members
+
+    </div>
+
+    <table class="data-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Member ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for member in members %}
+
+            <tr>
+
+                <td>{{ member.member_id }}</td>
+
+                <td>{{ member.name }}</td>
+
+                <td>{{ member.email }}</td>
+
+                <td>{{ member.phone }}</td>
+
+                <td>
+
+                    <a
+                        href="/members/edit/{{ member.member_id }}"
+                        class="btn btn-yellow"
+                        style="padding:8px 12px;"
+                    >
+
+                        <i class="fas fa-pen"></i>
+
+                    </a>
+
+                    <a
+                        href="/members/delete/{{ member.member_id }}"
+                        class="btn btn-red"
+                        style="padding:8px 12px;"
+                    >
+
+                        <i class="fas fa-trash"></i>
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- PAGINATION -->
+
+<div class="pagination">
+
+    {% if page > 1 %}
+
+        <a href="{{ base_url }}&page={{ page - 1 }}">
+
+            ← Previous
+
+        </a>
+
+    {% endif %}
+
+    {% for p in range(1, total_pages + 1) %}
+
+        {% if p == page %}
+
+            <a class="active">
+
+                {{ p }}
+
+            </a>
+
+        {% else %}
+
+            <a href="{{ base_url }}&page={{ p }}">
+
+                {{ p }}
+
+            </a>
+
+        {% endif %}
+
+    {% endfor %}
+
+    {% if page < total_pages %}
+
+        <a href="{{ base_url }}&page={{ page + 1 }}">
+
+            Next →
+
+        </a>
+
+    {% endif %}
+
+</div>
+
+<div style="text-align:center; margin-top:15px;">
+
+    Page {{ page }} of {{ total_pages }}
+
+</div>
+
+{% endblock %}

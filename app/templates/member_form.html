@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% if member %}
+Edit Member
+{% else %}
+Add Member
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+
+    {% if member %}
+
+        <i class="fas fa-pen"></i>
+
+        Edit Member
+
+    {% else %}
+
+        <i class="fas fa-plus-circle"></i>
+
+        Add New Member
+
+    {% endif %}
+
+</h1>
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        {% if member %}
+
+            Edit Member
+
+        {% else %}
+
+            Add New Member
+
+        {% endif %}
+
+    </div>
+
+    <div class="panel-body">
+
+        <!-- FORM -->
+
+        {% if member %}
+
+        <form
+            method="post"
+            action="/members/{{ member.member_id }}"
+        >
+
+        {% else %}
+
+        <form
+            method="post"
+            action="/members/"
+        >
+
+        {% endif %}
+
+            <!-- MEMBER ID -->
+
+            <div style="margin-bottom:20px;">
+
+                <label>
+
+                    <i class="fas fa-id-card"></i>
+
+                    Member ID (auto-generated)
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    class="search-input"
+
+                    value="{% if member %}{{ member.member_id }}{% else %}Auto Generated{% endif %}"
+
+                    readonly
+                >
+
+            </div>
+
+            <!-- NAME -->
+
+            <div style="margin-bottom:20px;">
+
+                <label>
+
+                    <i class="fas fa-user"></i>
+
+                    Name
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    name="name"
+                    class="search-input"
+
+                    value="{{ member.name if member else '' }}"
+
+                    required
+                >
+
+            </div>
+
+            <!-- EMAIL -->
+
+            <div style="margin-bottom:20px;">
+
+                <label>
+
+                    <i class="fas fa-envelope"></i>
+
+                    Email
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="search-input"
+
+                    value="{{ member.email if member else '' }}"
+
+                    required
+                >
+
+            </div>
+
+            <!-- PHONE -->
+
+            <div style="margin-bottom:25px;">
+
+                <label>
+
+                    <i class="fas fa-phone"></i>
+
+                    Phone
+
+                </label>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    name="phone"
+                    class="search-input"
+
+                    value="{{ member.phone if member else '' }}"
+
+                    placeholder="e.g. 555-0107"
+
+                    required
+                >
+
+            </div>
+
+            <!-- BUTTONS -->
+
+            <button
+                type="submit"
+                class="btn btn-green"
+            >
+
+                {% if member %}
+
+                    <i class="fas fa-save"></i>
+
+                    Update
+
+                {% else %}
+
+                    <i class="fas fa-floppy-disk"></i>
+
+                    Create
+
+                {% endif %}
+
+            </button>
+
+            <a
+                href="/members/landing"
+                class="btn btn-gray"
+            >
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

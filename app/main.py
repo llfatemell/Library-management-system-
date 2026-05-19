@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from app.routes import books
+from app.routes import members
 
 import json
 
@@ -16,6 +17,11 @@ templates = Jinja2Templates(directory="app/templates")
 app.include_router(
     books.router,
     prefix="/books"
+)
+
+app.include_router(
+    members.router,
+    prefix="/members"
 )
 
 

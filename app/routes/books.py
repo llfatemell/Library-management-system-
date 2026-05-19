@@ -7,25 +7,20 @@ import json
 router = APIRouter()
 
 templates = Jinja2Templates(directory="app/templates")
-
-
-# خواندن کتاب‌ها
 def load_books():
-
     with open("books.json", "r") as file:
-
         return json.load(file)
 
-
-# ذخیره کتاب‌ها
 def save_books(books):
 
     with open("books.json", "w") as file:
 
-        json.dump(books, file, indent=4)
+        json.dump(
+            books,
+            file,
+            indent=4
+        )
 
-
-# نمایش لیست کتاب‌ها + سرچ + مرتب‌سازی + صفحه‌بندی
 @router.get("/landing")
 def books_landing(
     request: Request,
@@ -35,8 +30,6 @@ def books_landing(
 ):
 
     books = load_books()
-
-    # SEARCH
 
     if search:
 
@@ -58,8 +51,6 @@ def books_landing(
 
         ]
 
-    # SORT
-
     if sort == "title":
 
         books.sort(
@@ -78,8 +69,6 @@ def books_landing(
             key=lambda x: x["year"]
         )
 
-    # PAGINATION
-
     per_page = 5
 
     total_books = len(books)
@@ -93,8 +82,6 @@ def books_landing(
     end = start + per_page
 
     books = books[start:end]
-
-    # BASE URL
 
     base_url = (
         f"/books/landing?"
@@ -125,8 +112,6 @@ def books_landing(
 
     )
 
-
-# فرم افزودن کتاب
 @router.get("/add")
 def add_book_form(request: Request):
 
@@ -144,21 +129,18 @@ def add_book_form(request: Request):
         }
 
     )
-
-
-# ذخیره کتاب جدید
 @router.post("/")
 def create_book(
     request: Request,
     isbn: str = Form(...),
     title: str = Form(...),
     author: str = Form(...),
-    year: int = Form(...)
+    year: int = Form(...),
+    borrowed: bool = Form(False),
+    loaned_to: str = Form("")
 ):
 
     books = load_books()
-
-    # بررسی تکراری نبودن ISBN
 
     for book in books:
 
@@ -190,7 +172,9 @@ def create_book(
 
         "year": year,
 
-        "borrowed": False
+        "borrowed": borrowed,
+
+        "loaned_to": loaned_to
 
     }
 
@@ -202,9 +186,6 @@ def create_book(
         url="/books/landing",
         status_code=303
     )
-
-
-# فرم ویرایش کتاب
 @router.get("/edit/{isbn}")
 def edit_book_form(
     request: Request,
@@ -239,15 +220,14 @@ def edit_book_form(
 
     )
 
-
-# ذخیره ویرایش کتاب
 @router.post("/{isbn}")
 def update_book(
     isbn: str,
     title: str = Form(...),
     author: str = Form(...),
     year: int = Form(...),
-    borrowed: bool = Form(False)
+    borrowed: bool = Form(False),
+    loaned_to: str = Form("")
 ):
 
     books = load_books()
@@ -262,7 +242,7 @@ def update_book(
 
             book["year"] = year
 
-            book["borrowed"] = borrowed
+            book["borrowed"] = borrowedbook["loaned_to"] = loaned_to
 
     save_books(books)
 
@@ -271,8 +251,6 @@ def update_book(
         status_code=303
     )
 
-
-# صفحه حذف کتاب
 @router.get("/delete/{isbn}")
 def delete_book_page(
     request: Request,
@@ -305,9 +283,6 @@ def delete_book_page(
         }
 
     )
-
-
-# حذف نهایی کتاب
 @router.post("/delete/{isbn}")
 def delete_book(isbn: str):
 
