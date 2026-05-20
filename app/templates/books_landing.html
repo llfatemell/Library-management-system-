@@ -14,8 +14,6 @@ Books Management
 
 </h1>
 
-<!-- SEARCH -->
-
 <div class="search-box">
 
     <form
@@ -51,8 +49,6 @@ Books Management
 
 </div>
 
-<!-- ADD BUTTON -->
-
 <div style="margin-bottom:25px;">
 
     <a
@@ -67,8 +63,6 @@ Books Management
     </a>
 
 </div>
-
-<!-- SORT -->
 
 <div class="search-box">
 
@@ -104,8 +98,6 @@ Books Management
     </a>
 
 </div>
-
-<!-- TABLE -->
 
 <div class="table-wrapper">
 
@@ -148,27 +140,27 @@ Books Management
 
                 <td>{{ book.year }}</td>
 
-                <td>
+                    <td>
 
-                    {% if book.borrowed %}
+                        {% if book.borrowed %}
 
-                        <span class="badge badge-gray">
+                            <span class="badge badge-gray">
 
-                            Loaned
+                                Loaned to {{ book.get('loaned_to','') }}
 
-                        </span>
+                            </span>
 
-                    {% else %}
+                        {% else %}
 
-                        <span class="badge badge-green">
+                            <span class="badge badge-green">
 
-                            Available
+                                Available
 
-                        </span>
+                            </span>
 
-                    {% endif %}
+                        {% endif %}
 
-                </td>
+                    </td>
 
                 <td>
 
@@ -203,8 +195,6 @@ Books Management
     </table>
 
 </div>
-
-<!-- PAGINATION -->
 
 <div class="pagination">
 

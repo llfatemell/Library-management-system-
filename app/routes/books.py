@@ -242,7 +242,8 @@ def update_book(
 
             book["year"] = year
 
-            book["borrowed"] = borrowedbook["loaned_to"] = loaned_to
+            book["borrowed"] = borrowed
+            book["loaned_to"] = loaned_to
 
     save_books(books)
 

@@ -7,25 +7,16 @@ import json
 router = APIRouter()
 
 templates = Jinja2Templates(directory="app/templates")
-
-
-# خواندن اعضا
 def load_members():
 
     with open("members.json", "r") as file:
 
         return json.load(file)
-
-
-# ذخیره اعضا
 def save_members(members):
 
     with open("members.json", "w") as file:
 
         json.dump(members, file, indent=4)
-
-
-# تولید خودکار Member ID
 def generate_member_id(members):
 
     if not members:
@@ -41,9 +32,6 @@ def generate_member_id(members):
     new_number = number + 1
 
     return f"M{new_number:03d}"
-
-
-# نمایش لیست اعضا
 @router.get("/landing")
 def members_landing(
     request: Request,
@@ -54,7 +42,6 @@ def members_landing(
 
     members = load_members()
 
-    # SEARCH
 
     if search:
 
@@ -76,8 +63,6 @@ def members_landing(
 
         ]
 
-    # SORT
-
     if sort == "name":
 
         members.sort(
@@ -90,7 +75,6 @@ def members_landing(
             key=lambda x: x["email"]
         )
 
-    # PAGINATION
 
     per_page = 5
 
@@ -105,8 +89,6 @@ def members_landing(
     end = start + per_page
 
     members = members[start:end]
-
-    # BASE URL
 
     base_url = (
         f"/members/landing?"
@@ -136,9 +118,6 @@ def members_landing(
         }
 
     )
-
-
-# فرم افزودن عضو
 @router.get("/add")
 def add_member_form(request: Request):
 
@@ -155,9 +134,6 @@ def add_member_form(request: Request):
         }
 
     )
-
-
-# ذخیره عضو جدید
 @router.post("/")
 def create_member(
     name: str = Form(...),
@@ -189,9 +165,6 @@ def create_member(
         url="/members/landing",
         status_code=303
     )
-
-
-# فرم ویرایش عضو
 @router.get("/edit/{member_id}")
 def edit_member_form(
     request: Request,
@@ -224,9 +197,6 @@ def edit_member_form(
         }
 
     )
-
-
-# ذخیره ویرایش عضو
 @router.post("/{member_id}")
 def update_member(
     member_id: str,
@@ -253,9 +223,6 @@ def update_member(
         url="/members/landing",
         status_code=303
     )
-
-
-# صفحه حذف عضو
 @router.get("/delete/{member_id}")
 def delete_member_page(
     request: Request,
@@ -286,9 +253,6 @@ def delete_member_page(
         }
 
     )
-
-
-# حذف نهایی عضو
 @router.post("/delete/{member_id}")
 def delete_member(member_id: str):
 

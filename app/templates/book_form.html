@@ -20,8 +20,6 @@ Add New Book
     "
 >
 
-    <!-- HEADER -->
-
     <div class="panel-header">
 
         {% if book %}
@@ -42,8 +40,6 @@ Add New Book
 
     <div class="panel-body">
 
-        <!-- ERROR -->
-
         {% if error %}
 
         <div
@@ -62,8 +58,6 @@ Add New Book
 
         {% endif %}
 
-        <!-- FORM -->
-
         {% if book %}
 
         <form
@@ -79,8 +73,6 @@ Add New Book
         >
 
         {% endif %}
-
-            <!-- ISBN -->
 
             <div style="margin-bottom:25px;">
 
@@ -109,8 +101,6 @@ Add New Book
 
             </div>
 
-            <!-- TITLE -->
-
             <div style="margin-bottom:25px;">
 
                 <label>
@@ -134,8 +124,6 @@ Add New Book
                 >
 
             </div>
-
-            <!-- AUTHOR -->
 
             <div style="margin-bottom:25px;">
 
@@ -161,8 +149,6 @@ Add New Book
 
             </div>
 
-            <!-- YEAR -->
-
             <div style="margin-bottom:25px;">
 
                 <label>
@@ -187,8 +173,6 @@ Add New Book
 
             </div>
 
-            <!-- BORROWED -->
-
             <div style="margin-bottom:20px;">
 
                 <label>
@@ -208,8 +192,6 @@ Add New Book
 
             </div>
 
-            <!-- MEMBER ID -->
-
             <div style="margin-bottom:30px;">
 
                 <label>
@@ -227,14 +209,12 @@ Add New Book
                     name="loaned_to"
                     class="search-input"
 
-                    value="{{ book.loaned_to if book else '' }}"
+                    value="{{ book.get('loaned_to', '') if book else '' }}"
 
                     placeholder="e.g. M001"
                 >
 
             </div>
-
-            <!-- BUTTONS -->
 
             <button
                 type="submit"

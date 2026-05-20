@@ -4,21 +4,23 @@
         "title": "The Odyssey",
         "author": "Homer",
         "year": 1996,
-        "borrowed": false
+        "borrowed": true,
+        "loaned_to": "M001"
     },
     {
         "isbn": "9780451524935",
         "title": "1984",
         "author": "George Orwell",
         "year": 1949,
-        "borrowed": true
+        "borrowed": false
     },
     {
         "isbn": "123445",
         "title": "digital",
         "author": "me",
         "year": 2000,
-        "borrowed": true
+        "borrowed": true,
+        "loaned_to": "M002"
     },
     {
         "isbn": "56432",
@@ -43,5 +45,13 @@
         "year": 1998,
         "borrowed": false,
         "loaned_to": ""
+    },
+    {
+        "isbn": "98765440",
+        "title": "test",
+        "author": "Brrrrr",
+        "year": 3398,
+        "borrowed": true,
+        "loaned_to": "M003"
     }
 ]

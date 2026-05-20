@@ -7,11 +7,7 @@ from app.routes import members
 import json
 
 app = FastAPI()
-
-# اتصال فایل‌های استاتیک
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
-
-# اتصال templates
 templates = Jinja2Templates(directory="app/templates")
 
 app.include_router(
@@ -51,10 +47,18 @@ def dashboard(request: Request):
 
     total_members = len(members)
 
-    years = [book["year"] for book in books]
+    oldest_book = min(
+    books,
+    key=lambda x: x["year"]
+    )if books else None
 
-    oldest_book = min(years) if years else "N/A"
-    newest_book = max(years) if years else "N/A"
+
+    newest_book = max(
+    books,
+    key=lambda x: x["year"]
+    )if books else None
+    
+
 
     unique_authors = len(
         set(book["author"] for book in books)
