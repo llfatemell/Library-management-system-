@@ -75,17 +75,11 @@ Add New Book
         {% endif %}
 
             <div style="margin-bottom:25px;">
-
                 <label>
-
                     <i class="fas fa-barcode"></i>
-
                     ISBN
-
                 </label>
-
                 <br><br>
-
                 <input
                     type="text"
                     name="isbn"
@@ -98,21 +92,13 @@ Add New Book
 
                     required
                 >
-
             </div>
-
             <div style="margin-bottom:25px;">
-
                 <label>
-
                     <i class="fas fa-heading"></i>
-
                     Title
-
                 </label>
-
                 <br><br>
-
                 <input
                     type="text"
                     name="title"
@@ -122,21 +108,13 @@ Add New Book
 
                     required
                 >
-
             </div>
-
             <div style="margin-bottom:25px;">
-
                 <label>
-
                     <i class="fas fa-user-edit"></i>
-
                     Author
-
                 </label>
-
                 <br><br>
-
                 <input
                     type="text"
                     name="author"
@@ -146,21 +124,13 @@ Add New Book
 
                     required
                 >
-
             </div>
-
             <div style="margin-bottom:25px;">
-
                 <label>
-
                     <i class="fas fa-calendar"></i>
-
                     Year
-
                 </label>
-
                 <br><br>
-
                 <input
                     type="number"
                     name="year"
@@ -170,13 +140,9 @@ Add New Book
 
                     required
                 >
-
             </div>
-
             <div style="margin-bottom:20px;">
-
                 <label>
-
                     <input
                         type="checkbox"
                         name="borrowed"
@@ -185,37 +151,23 @@ Add New Book
                         checked
                         {% endif %}
                     >
-
                     Currently loaned out
-
                 </label>
-
             </div>
-
             <div style="margin-bottom:30px;">
-
                 <label>
-
                     <i class="fas fa-user"></i>
-
                     Loaned to (Member ID)
-
                 </label>
-
                 <br><br>
-
                 <input
                     type="text"
                     name="loaned_to"
                     class="search-input"
-
                     value="{{ book.get('loaned_to', '') if book else '' }}"
-
                     placeholder="e.g. M001"
                 >
-
             </div>
-
             <button
                 type="submit"
                 class="btn btn-green"

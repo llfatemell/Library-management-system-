@@ -63,21 +63,13 @@ Add Member
         >
 
         {% endif %}
-
-            <!-- MEMBER ID -->
-
             <div style="margin-bottom:20px;">
-
                 <label>
-
                     <i class="fas fa-id-card"></i>
-
                     Member ID (auto-generated)
 
                 </label>
-
                 <br><br>
-
                 <input
                     type="text"
                     class="search-input"
@@ -86,69 +78,41 @@ Add Member
 
                     readonly
                 >
-
             </div>
-
             <div style="margin-bottom:20px;">
-
                 <label>
-
                     <i class="fas fa-user"></i>
-
                     Name
-
                 </label>
-
                 <br><br>
-
                 <input
                     type="text"
                     name="name"
                     class="search-input"
-
                     value="{{ member.name if member else '' }}"
-
                     required
                 >
-
             </div>
-
             <div style="margin-bottom:20px;">
-
                 <label>
-
                     <i class="fas fa-envelope"></i>
-
                     Email
-
                 </label>
-
                 <br><br>
-
                 <input
                     type="email"
                     name="email"
                     class="search-input"
-
                     value="{{ member.email if member else '' }}"
-
                     required
                 >
-
             </div>
-
             <div style="margin-bottom:25px;">
-
                 <label>
-
                     <i class="fas fa-phone"></i>
-
                     Phone
-
                 </label>
-
                 <br><br>
-
                 <input
                     type="text"
                     name="phone"
@@ -160,7 +124,6 @@ Add Member
 
                     required
                 >
-
             </div>
 
             <button

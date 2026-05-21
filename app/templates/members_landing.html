@@ -174,53 +174,39 @@ Members Management
 <div class="pagination">
 
     {% if page > 1 %}
-
         <a href="{{ base_url }}&page={{ page - 1 }}">
-
             ← Previous
-
         </a>
-
     {% endif %}
 
     {% for p in range(1, total_pages + 1) %}
 
-        {% if p == page %}
+        {% if p >= page - 1 and p <= page + 1 %}
 
-            <a class="active">
-
-                {{ p }}
-
-            </a>
-
-        {% else %}
-
-            <a href="{{ base_url }}&page={{ p }}">
-
-                {{ p }}
-
-            </a>
+            {% if p == page %}
+                <a class="active">
+                    {{ p }}
+                </a>
+            {% else %}
+                <a href="{{ base_url }}&page={{ p }}">
+                    {{ p }}
+                </a>
+            {% endif %}
 
         {% endif %}
 
     {% endfor %}
 
     {% if page < total_pages %}
-
         <a href="{{ base_url }}&page={{ page + 1 }}">
-
             Next →
-
         </a>
-
     {% endif %}
 
+    <p class="page-info">
+        Page {{ page }} of {{ total_pages }}
+        ({{ members|length }} members on this page)
+    </p>
+
 </div>
-
-<div style="text-align:center; margin-top:15px;">
-
-    Page {{ page }} of {{ total_pages }}
-
-</div>
-
 {% endblock %}

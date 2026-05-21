@@ -75,7 +75,7 @@ def books_landing(
 
     total_pages = (
         total_books + per_page - 1
-    ) // per_page
+    ) 
 
     start = (page - 1) * per_page
 
